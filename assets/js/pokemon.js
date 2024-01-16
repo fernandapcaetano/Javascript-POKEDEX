@@ -49,9 +49,10 @@ function displayPokemon(pokemon){
             const succes = await fetchPokemonDataBeforeRedirect(pokemonID);
             if (succes) {
                 window.location.href = `./detail.html?id=${pokemonID}`;
-                notFoundMessage.style.display = "none";
+    
             }
         });
+        notFoundMessage.style.display = "none";
         pokemonList.appendChild(listItem);
     });
 }
