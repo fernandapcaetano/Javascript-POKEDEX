@@ -42,7 +42,7 @@ function displayPokemon(pokemon){
             <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${pokemonID}.svg"  alt="${pokemon.name}">
             <div class="details">
                 <h2 id="name">${pokemon.name}</h2>
-                <p class="id">${pokemonID}1</p>
+                <p class="id">${pokemonID}</p>
             </div>
         `
         listItem.addEventListener("click", async () => {
