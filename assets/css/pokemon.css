@@ -1,0 +1,41 @@
+.pokemon-list{
+    padding-top: 20px;
+}
+.pokemon-list .erro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 80dvh;
+    height: 80vh;
+    font-size: 3rem;
+}
+.pokemon-list ul {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.pokemon-list ul li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 20px;
+    align-items: center;
+    width: 180px;
+    height: 200px;
+    border-radius: 20px;
+    border: 1px solid #22222269;
+    cursor: pointer;
+}
+.pokemon-list ul li img{
+    width: 80px;
+    max-width: 100%;
+    object-fit: cover;
+}
+.pokemon-list ul li .details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
