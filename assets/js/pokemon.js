@@ -91,3 +91,41 @@ function handleSearch() {
         displayPokemon(allPokemons);
     }
 }
+
+
+document.querySelectorAll('.sort_option input[type="radio"]').forEach((radio) => {
+    radio.addEventListener('click', handleFilterClick);
+});
+
+function handleFilterClick() {
+    // Recupera a preferência de ordenação do usuário
+    const sortOrder = getSortOrder();
+
+    // Ordena a lista de Pokémon com base na preferência do usuário
+    const sortedPokemons = sortPokemons(allPokemons, sortOrder);
+
+    // Exibe a lista ordenada
+    displayPokemon(sortedPokemons);
+}
+
+// Função para recuperar a preferência de ordenação do usuário
+function getSortOrder() {
+    if (numberFilter.checked) {
+        return "number";
+    } else if (nameFilter.checked) {
+        return "name";
+    } else {
+        return ""; // ou outro valor padrão, se necessário
+    }
+}
+
+// Função para ordenar a lista de Pokémon com base na preferência do usuário
+function sortPokemons(pokemons, sortOrder) {
+    if (sortOrder === "number") {
+        return [...pokemons].sort((a, b) => parseInt(a.url.split("/")[6]) - parseInt(b.url.split("/")[6]));
+    } else if (sortOrder === "name") {
+        return [...pokemons].sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+        return pokemons; // Se nenhum filtro estiver selecionado, retorna a lista sem alterações
+    }
+}
