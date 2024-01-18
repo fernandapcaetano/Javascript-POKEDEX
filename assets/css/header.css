@@ -83,4 +83,7 @@ header .search__container input{
         width: 100%;
         padding: 0;
     }
+    header{
+        padding: 15px;
+    }
 }

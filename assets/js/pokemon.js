@@ -59,30 +59,35 @@ function displayPokemon(pokemon){
     });
 }
 
+
+// Função para buscar Pokémon por id ou nome
+function searchPokemon(query) {
+    const searchTerm = query.toLowerCase();
+    const foundPokemons = allPokemons.filter((pokemon) => {
+        const pokemonID = parseInt(pokemon.url.split("/")[6]);
+        return pokemonID === parseInt(searchTerm) || pokemon.name.toLowerCase().includes(searchTerm);
+    });
+
+    // Verifica se algum Pokémon foi encontrado
+    if (foundPokemons.length > 0) {
+        displayPokemon(foundPokemons);
+        notFoundMessage.style.display = "none"; // Oculta a mensagem de "não encontrado"
+    } else {
+        // Se nenhum Pokémon foi encontrado, exibe a mensagem de "não encontrado"
+        displayPokemon([]); // Limpa a lista de Pokémon
+        notFoundMessage.style.display = "flex";
+    }
+}
+
+// Adiciona um evento de tecla ao campo de pesquisa
 searchInput.addEventListener('keyup', handleSearch);
 
 function handleSearch() {
-    const searchTerm = searchInput.value.toLowerCase();
-    let filteredPokemons;
-    
-    if ( numberFilter.checked ) {
-        filteredPokemons = allPokemons.filter((pokemon) => {
-            const pokemonID = pokemon.url.split("/")[6];
-            return pokemonID.startsWith(searchTerm);
-        });
-    } else if ( nameFilter.checked ) {
-        filteredPokemons = allPokemons.filter((pokemon) => {
-             pokemon.name.toLowerCase().startsWith(searchTerm);
-        });
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm !== "") {
+        searchPokemon(searchTerm);
     } else {
-        filteredPokemons = allPokemons;
-    }
-
-    displayPokemon(filteredPokemons);
-
-    if (filteredPokemons.length === 0) {
-        notFoundMessage.style.display = "flex";
-    } else {
-        notFoundMessage.style.display = "none";
+        // Se a caixa de pesquisa estiver vazia, exibe todos os Pokémon
+        displayPokemon(allPokemons);
     }
 }
