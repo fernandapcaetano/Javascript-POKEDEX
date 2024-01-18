@@ -30,12 +30,23 @@
 }
 .pokemon-list ul li img{
     width: 80px;
-    max-width: 100%;
-    object-fit: cover;
+    height: 80px;
+    object-fit: contain;
 }
 .pokemon-list ul li .details{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.pokemon-list ul li .details > a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+    background-color: #222;
+    padding: 5px 8px;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
 }

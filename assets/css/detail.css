@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: auto;
+}
+main{
+    background-color: #222222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    row-gap: 20px;
+    width: 100vw;
+    height: 100vh;
+}
+.header_details{
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+    color: #fff;
+    text-transform: uppercase;
+}
+.header_details h3{
+    font-size: 14px;
+    font-weight: 700;
+    align-self: flex-end;
+    margin-bottom: 13px;
+}
+main .header_img{
+    display: flex;
+    align-items: center;
+    column-gap: 60px;
+}
+
+.type{
+    background-color: #fff;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #5c85ed;
+}
+img#foto_pokemon{
+    min-width: 30vw;
+    max-width: 100%;
+}
+
+@media (max-width: 800px){
+    img#foto_pokemon{
+        width: 400px;
+        max-width: 100%;
+    }
+}

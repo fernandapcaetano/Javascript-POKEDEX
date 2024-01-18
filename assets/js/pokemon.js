@@ -17,22 +17,22 @@ fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`)
     })
 
 //carrega os dados antes de entrar na página de detalhes
-async function fetchPokemonDataBeforeRedirect(id){
+async function fetchPokemonDataBeforeRedirect(id) {
+    try {
+        const [pokemon, pokemonSpecies] = await Promise.all([
+            fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) => res.json()),
+            fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) => res.json())
+        ]);
 
-    try{
-        const [pokemon, pokemonSpecies] = await Promise.all([fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) => 
-            res.json()
-        ),
-        fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) => 
-            res.json()
-        )
-
-    ])
-    return true
-    } catch(error){
+        // Retorna os dados do Pokémon e da espécie
+        return { pokemon, pokemonSpecies };
+    } catch (error) {
         console.error("Failed to fetch pokemon data before redirect");
+        return null;
     }
 }
+
+
 
 function displayPokemon(pokemon){
     pokemonList.innerHTML = "";
@@ -45,15 +45,19 @@ function displayPokemon(pokemon){
             <div class="details">
                 <h2 id="name">${pokemon.name}</h2>
                 <p class="id">${pokemonID}</p>
+                <a href ="#"> Ver mais </a>
             </div>
         `
         listItem.addEventListener("click", async () => {
-            const succes = await fetchPokemonDataBeforeRedirect(pokemonID);
-            if (succes) {
-                window.location.href = `./detail.html?id=${pokemonID}`;
-    
+            const data = await fetchPokemonDataBeforeRedirect(pokemonID);
+            if (data) {
+                const { pokemon, pokemonSpecies } = data;
+        
+                // Redireciona para detail.html com parâmetros necessários
+                window.location.href = `./detail.html?id=${pokemonID}&name=${pokemon.name}&photo=${pokemon.sprites.other.dream_world.front_default}`;
             }
         });
+        
         notFoundMessage.style.display = "none";
         pokemonList.appendChild(listItem);
     });
@@ -129,3 +133,4 @@ function sortPokemons(pokemons, sortOrder) {
         return pokemons; // Se nenhum filtro estiver selecionado, retorna a lista sem alterações
     }
 }
+
